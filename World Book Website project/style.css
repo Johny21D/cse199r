@@ -1,6 +1,4 @@
-/* ===============================
-   CORE STYLES & RESET
-================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -48,6 +46,14 @@ nav a {
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
+    transition: 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 /* ===============================
@@ -65,7 +71,7 @@ main > section:not(#demo-section) {
     gap: 20px;
     padding: 20px;
     max-width: 1100px;
-    margin: 20px auto;
+    margin: 40px auto;
 
 }
 
@@ -89,6 +95,13 @@ main > section img {
     height: auto;
     border-radius: 12px;
     display: block;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+main > section img:hover {
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
 }
 
 /* ===============================
@@ -96,7 +109,7 @@ main > section img {
 ================================ */
 @media (min-width: 768px) {
     nav {
-        flex-direction: row; /* Horizontal nav for desktop */
+        flex-direction: row;
         justify-content: space-between;
         height: 100px;
         padding: 0 60px;
@@ -107,42 +120,95 @@ main > section img {
         margin: 60px auto;
     }
 
-    main > section:not(#demo-section) {
+    /* 1. PURPOSE SECTION: Keeps the 2-column look */
+    main > section:not(#demo-section):not(.recipe-row section) {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        grid-template-columns: 1fr 1fr;
         align-items: center;
         gap: 50px;
         margin: 80px auto;
     }
-
-    /* Define positions for Desktop only */
-    #purpose-text { 
-        grid-column: 1;
-        transform: translateY(-340px);
+    /* --- Desktop 3-Column Layout --- */
+@media (min-width: 768px) {
+/* --- Desktop Row with Hover Effects --- */
+@media (min-width: 768px) {
+    /* 1. The Container: 3 equal columns */
+    .recipe-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 1150px;
+        margin: 50px auto;
+        align-items: stretch;
     }
-    #purpose-img  { grid-column: 2; }
 
-    #home-img     { grid-column: 1; }
-    #home-text    { grid-column: 2; }
+    /* 2. The Card: Holds image and text together */
+    .recipe-row section {
+        display: flex;
+        flex-direction: column;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden; /* Clips image corners to the card */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
 
-    #events-text  { grid-column: 1; }
-    #events-img   { grid-column: 2; }
+    /* 3. The Image: Forced to same height */
+    .recipe-row img {
+        width: 100%;
+        height: 250px;      /* Set your desired uniform height */
+        object-fit: cover;  /* Prevents stretching/squishing */
+        display: block;
+        transition: transform 0.5s ease;
+    }
 
-    /* Special full-width row for Restaurant */
+    /* 4. The Text Box: Stays under the image */
+    .recipe-row p {
+        padding: 20px;
+        margin: 0;
+        flex-grow: 1;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        background: white;
+    }
+
+    /* 5. HOVER EFFECTS */
+    /* Lift the whole card up */
+    .recipe-row section:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    /* Slight zoom on the image inside the card */
+    .recipe-row section:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Cleanup for previous restaurant/purpose code */
     #restaurant-img, #restaurant-text {
-        grid-column: 1 / span 2;
-        max-width: 800px;
-        margin: 0 auto;
+        grid-column: auto;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    #purpose-text {
+        transform: none;
     }
 }
+}
+}
 
-/* ===============================
-   FOOTER
-================================ */
 footer {
     background-color: #2c3e50;
     color: white;
     text-align: center;
-    padding: 30px;
-    margin-top: 60px;
+    padding: 40px 30px;
+    margin-top: 80px;
+    border-top: 4px solid #34495e;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 0.95rem;
 }
