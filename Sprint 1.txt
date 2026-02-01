@@ -1,0 +1,12 @@
+Work Log for Edward Jones:
+
+Date | Time Started | Duration | Description 
+
+01/07/2025 | 10:00 | 1 hr  | Class
+01/10/2025 | 11:00 | 2 hrs | Wire Frame
+01/11/2025 | 9:00  | 1 hr  | class
+01/12/2025 | 2:30  | 1 hr  | HTML  
+01/14/2025 | 9:00  | 1 hr  | Class
+01/15/2025 | 3:00  | 1 hr  | Research for Images 
+01/21/2025 | 9:00  | 1 hr  | Class
+

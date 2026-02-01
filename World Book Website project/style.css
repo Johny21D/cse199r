@@ -1,0 +1,163 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f6f6f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* NAV */
+nav {
+    background-color: #2c3e50;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+#logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+nav h1 {
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* TITLE */
+h2 {
+    text-align: center;
+    margin: 40px auto;
+    max-width: 800px;
+    font-size: 1.2rem;
+}
+//* ===============================
+   RESET OLD POSITIONING HACKS
+================================ */
+#purpose-img,
+#purpose-text,
+#home-img,
+#home-text,
+#events-img,
+#events-text,
+#restaurant-img,
+#restaurant-text {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+}
+
+/* ===============================
+   GRID LAYOUT FOR CONTENT SECTIONS
+================================ */
+main > section:not(#demo-section) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 20px;
+
+    align-items: center;
+}
+
+/* ===============================
+   SHARED STYLES
+================================ */
+main > section:not(#demo-section) img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+#purpose-text,
+#home-text,
+#events-text,
+#restaurant-text {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+/* ===============================
+   ALTERNATING LAYOUTS
+================================ */
+
+/* PURPOSE — text left, image right */
+#purpose-text { grid-column: 1; }
+#purpose-img  { grid-column: 2; }
+
+/* HOME — image left, text right */
+#home-img  { grid-column: 1; }
+#home-text { grid-column: 2; }
+
+/* EVENTS — text left, image right */
+#events-text { grid-column: 1; }
+#events-img  { grid-column: 2; }
+
+/* RESTAURANT — image top, text below */
+#restaurant-img {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#restaurant-text {
+    grid-column: 1 / -1;
+}
+
+/* ===============================
+   RESPONSIVE — MOBILE & TABLET
+================================ */
+@media (max-width: 768px) {
+    main > section:not(#demo-section) {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    main > section:not(#demo-section) img {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    main > section:not(#demo-section) {
+        gap: 30px;
+    }
+}
+
+
+
+/* FOOTER */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 80px;
+}
+
