@@ -1,9 +1,11 @@
-
+/* ===============================
+   CORE STYLES & RESET
+================================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
@@ -12,152 +14,135 @@ body {
     line-height: 1.6;
 }
 
-/* NAV */
+/* ===============================
+   NAVIGATION (Mobile First)
+================================ */
 nav {
     background-color: #2c3e50;
-    height: 100px;
     display: flex;
+    flex-direction: column; /* Stack logo and menu on mobile */
     align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
+    padding: 20px;
+    gap: 15px;
 }
 
 #logo {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
 }
 
 nav h1 {
     color: white;
+    font-size: 1.5rem;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 20px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-/* TITLE */
+/* ===============================
+   CONTENT SECTIONS (Mobile First)
+================================ */
 h2 {
     text-align: center;
-    margin: 40px auto;
-    max-width: 800px;
+    margin: 30px 20px;
     font-size: 1.2rem;
 }
-//* ===============================
-   RESET OLD POSITIONING HACKS
-================================ */
-#purpose-img,
-#purpose-text,
-#home-img,
-#home-text,
-#events-img,
-#events-text,
-#restaurant-img,
-#restaurant-text {
-    position: static;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    margin: 0;
-}
 
-/* ===============================
-   GRID LAYOUT FOR CONTENT SECTIONS
-================================ */
 main > section:not(#demo-section) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 40px;
-
-    max-width: 1200px;
-    margin: 80px auto;
+    display: flex;
+    flex-direction: column; /* Stack everything vertically by default */
+    gap: 20px;
     padding: 20px;
+    max-width: 1100px;
+    margin: 20px auto;
 
-    align-items: center;
 }
 
-/* ===============================
-   SHARED STYLES
-================================ */
-main > section:not(#demo-section) img {
-    width: 100%;
-    border-radius: 12px;
-}
-
-#purpose-text,
-#home-text,
-#events-text,
-#restaurant-text {
+#purpose-text{
     background: white;
     padding: 25px;
     border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+}
+/* Shared Card Look */
+ #home-text, #events-text, #restaurant-text, #demo-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+main > section img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
 }
 
 /* ===============================
-   ALTERNATING LAYOUTS
+   DESKTOP LAYOUT (768px and up)
 ================================ */
-
-/* PURPOSE — text left, image right */
-#purpose-text { grid-column: 1; }
-#purpose-img  { grid-column: 2; }
-
-/* HOME — image left, text right */
-#home-img  { grid-column: 1; }
-#home-text { grid-column: 2; }
-
-/* EVENTS — text left, image right */
-#events-text { grid-column: 1; }
-#events-img  { grid-column: 2; }
-
-/* RESTAURANT — image top, text below */
-#restaurant-img {
-    grid-column: 1 / -1;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-#restaurant-text {
-    grid-column: 1 / -1;
-}
-
-/* ===============================
-   RESPONSIVE — MOBILE & TABLET
-================================ */
-@media (max-width: 768px) {
-    main > section:not(#demo-section) {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
+@media (min-width: 768px) {
+    nav {
+        flex-direction: row; /* Horizontal nav for desktop */
+        justify-content: space-between;
+        height: 100px;
+        padding: 0 60px;
     }
 
-    main > section:not(#demo-section) img {
-        max-width: 100%;
+    h2 {
+        font-size: 1.8rem;
+        margin: 60px auto;
+    }
+
+    main > section:not(#demo-section) {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        align-items: center;
+        gap: 50px;
+        margin: 80px auto;
+    }
+
+    /* Define positions for Desktop only */
+    #purpose-text { 
+        grid-column: 1;
+        transform: translateY(-340px);
+    }
+    #purpose-img  { grid-column: 2; }
+
+    #home-img     { grid-column: 1; }
+    #home-text    { grid-column: 2; }
+
+    #events-text  { grid-column: 1; }
+    #events-img   { grid-column: 2; }
+
+    /* Special full-width row for Restaurant */
+    #restaurant-img, #restaurant-text {
+        grid-column: 1 / span 2;
+        max-width: 800px;
         margin: 0 auto;
     }
 }
 
-@media (max-width: 1024px) {
-    main > section:not(#demo-section) {
-        gap: 30px;
-    }
-}
-
-
-
-/* FOOTER */
+/* ===============================
+   FOOTER
+================================ */
 footer {
     background-color: #2c3e50;
     color: white;
     text-align: center;
-    padding: 15px;
-    margin-top: 80px;
+    padding: 30px;
+    margin-top: 60px;
 }
-
