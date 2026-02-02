@@ -28,35 +28,34 @@ foodAreas.forEach(area => {
         popup.style.display = 'none';
     });
 
-    // --- EFFECT 2: CLICK (Big Pop Out) ---
+    // --- EFFECT 2: CLICK (Navigate OR Modal) ---
     area.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevents the page from jumping up
-        modal.style.display = "block";
-        modalImg.src = area.getAttribute('data-img');
-        modalCaption.innerText = area.getAttribute('data-info');
+        e.preventDefault(); 
+        
+        const targetUrl = area.getAttribute('data-url');
+
+        if (targetUrl) {
+            // If the area has a URL (The Burger), go to that page
+            window.location.href = targetUrl; 
+        } else {
+            // Otherwise, show the big pop-out modal
+            popup.style.display = 'none'; 
+            modal.style.display = "block";
+            modalImg.src = area.getAttribute('data-img');
+            modalCaption.innerText = area.getAttribute('data-info');
+        }
     });
 });
 
 // --- CLOSE MODAL LOGIC ---
-// Close when clicking the (X)
 if(closeBtn) {
     closeBtn.onclick = () => {
         modal.style.display = "none";
     };
 }
 
-// Close when clicking anywhere on the dark background
 window.onclick = (event) => {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 };
-
-// --- EFFECT 2: CLICK (Big Pop Out) ---
-    area.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        popup.style.display = 'none'; // ADD THIS: Hides the small preview immediately
-        modal.style.display = "block";
-        modalImg.src = area.getAttribute('data-img');
-        modalCaption.innerText = area.getAttribute('data-info');
-    });

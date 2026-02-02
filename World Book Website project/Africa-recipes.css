@@ -1,0 +1,68 @@
+h1{
+    text-align: center;
+}
+/* This targets the <main class="grid-wrapper"> */
+.grid-wrapper {
+    display: grid;
+    /* FIX: '1fr' means one equal fraction. '4fr' x 4 would also work, 
+       but 1fr is the standard for 'one part of the available space' */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* This targets each <section class="region-section"> */
+.region-section {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    /* Ensures buttons or footers stay at the bottom of the card */
+    justify-content: space-between; 
+}
+
+.recipe-img {
+    width: 100%;           
+    height: 200px;         
+    object-fit: cover;     
+    object-position: center; 
+    border-radius: 5px; 
+    display: block;
+    margin-bottom: 10px; /* Space between image and text */
+}
+
+h2 {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    line-height: 1.3;
+}
+
+/* --- Responsive Breakpoints --- */
+
+/* Desktop/Laptop (Large): 4 Columns (Default) */
+
+/* Tablets (Medium): 2 Columns */
+@media (max-width: 992px) {
+    .grid-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Phones (Small): 1 Column */
+@media (max-width: 600px) {
+    .grid-wrapper {
+        grid-template-columns: 1fr;
+        padding: 15px; /* Slightly less padding on tiny screens */
+    }
+    
+    .recipe-img {
+        height: 180px; /* Slightly shorter images on mobile to save scroll space */
+    }
+}
