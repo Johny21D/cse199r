@@ -1,0 +1,53 @@
+/* This targets the <main class="grid-wrapper"> */
+.grid-wrapper {
+    display: grid !important;
+    /* Force 4 columns of equal width */
+    grid-template-columns: repeat(4, 4fr) !important; 
+    /* The gap between the boxes */
+    gap: 20px; 
+    /* Ensure the grid takes up the full width of the screen */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* This targets each <section class="region-section"> */
+.region-section {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Keeps boxes same height even if text length is different */
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-img {
+    width: 100%;           /* Fills the width of the grid box */
+    height: 200px;         /* Forces every image to be exactly 200px tall */
+    object-fit: cover;     /* Crops the image to fit the box perfectly */
+    object-position: center; /* Ensures the middle of the photo is visible */
+    border-radius: 8px ; 
+    display: block;
+}
+/* Optional: Fixes text overflow if names are too long */
+h2 {
+    font-size: 1.1rem;
+    word-wrap: break-word;
+}
+
+/* Responsive: Only change to vertical on very small screens */
+@media (max-width: 800px) {
+    .grid-wrapper {
+        grid-template-columns: 1fr 1fr; /* 2 columns for tablets */
+    }
+}
+
+@media (max-width: 500px) {
+    .grid-wrapper {
+        grid-template-columns: 1fr; /* 1 column for phones */
+    }
+}

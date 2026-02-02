@@ -9,93 +9,112 @@
 
 <body>
 
-<header>
-    <nav>
-        <img src="./images/Logo.png" alt="World Book Logo" id="logo">
-        <h1>World Book</h1>
+    <header>
+        <nav>
+            <img src="./images/Logo.png" alt="World Book Logo" id="logo">
+            <h1>World Book</h1>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Images.html">Recipes</a></li>
-            <li><a href="About.html">About Us</a></li>
-        </ul>
-    </nav>
-</header>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Images.html">Recipes</a></li>
+                <li><a href="About.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
+    <main>
 
-<h2>
-    A world book of recipes that helps users quickly find and cook the right dish for home, events, or restaurant use.
-</h2>
+    <h2>
+        A world book of recipes that helps users quickly find and cook the right dish for home, events, or restaurant use.
+    </h2>
 
-<!-- PURPOSE -->
-<section>
-    <img id="purpose-img" src="./images/Food-in-different-continents.png" alt="">
-    <p id="purpose-text">
-        World Book is a global collection of recipes designed to bring cultures together through food.
-        It helps users discover meals from different countries and regions around the world.
-        The platform focuses on simplicity, clarity, and accessibility for all skill levels.
-        Users can explore traditional dishes as well as modern interpretations of classic meals.
-        Each recipe is carefully organized to save time and reduce confusion in the kitchen.
-        The goal is to make cooking enjoyable, educational, and stress-free.
-    </p>
-</section>
-
-<div class="recipe-row">
-<!-- HOME COOKING -->
+    <!-- PURPOSE -->
     <section>
-        <img id="home-img" src="./images/Home-cooking.png" alt="">
-        <p id="home-text">
-        Home cooking is at the heart of World Book and is designed for everyday life.
-            Users can quickly find recipes that fit their available ingredients and time.
-            The instructions are written in a simple and easy-to-follow format.
-            Meals range from quick breakfasts to full family dinners.
-            The platform encourages healthy habits and confidence in the kitchen.
-            Even beginners can feel comfortable preparing meals with clear guidance.
+    <div class="map-container">
+            <img id="purpose-img" src="./images/Food-in-different-continents.png" usemap="#food-map" alt="World Map">
+            
+            <div id="food-popup" class="food-popup">
+                <img id="popup-img" src="" alt="Food Preview">
+                <p id="popup-text"></p>
+            </div>
+        </div>
+
+        <map name="food-map">
+            <area shape="circle" coords="120,135,40" data-img="./images/North-America-food.png" data-info="North American Foods">
+            <area shape="circle" coords="250,310,40" data-img="./images/South-America-food.png" data-info="South American Foods">
+            <area shape="circle" coords="485,115,40" data-img="./images/Europe-food.png" data-info="European Dishes">
+            <area shape="circle" coords="525,255,40" data-img="./images/African-food.png" data-info="African Dishes">
+            <area shape="circle" coords="760,155,40" data-img="./images/Asian-food.png" data-info="Asian Foods">
+            <area shape="circle" coords="825,325,40" data-img="./images/Australia-food.png" data-info="Australian Dishes">
+        </map>
+        <p id="purpose-text">
+            World Book is a global collection of recipes designed to bring cultures together through food.
+            It helps users discover meals from different countries and regions around the world.
+            The platform focuses on simplicity, clarity, and accessibility for all skill levels.
+            Users can explore traditional dishes as well as modern interpretations of classic meals.
+            Each recipe is carefully organized to save time and reduce confusion in the kitchen.
+            The goal is to make cooking enjoyable, educational, and stress-free.
         </p>
     </section>
 
-    <!-- EVENTS -->
-    <section>
-        <img id="events-img" src="./images/event-cooking.png" alt="">
-        <p id="events-text">
-        World Book provides inspiration for events both large and small.
-            Recipes are grouped by occasion, making planning easier and faster.
-            Users can prepare meals for parties, holidays, or special celebrations.
-            Each dish includes serving suggestions to help with portion planning.
-            The collection balances presentation and practicality.
-            This ensures events feel special without becoming overwhelming.
-        </p>
-    </section>
+    <div class="recipe-row">
+    <!-- HOME COOKING -->
+        <section>
+            <img id="home-img" src="./images/Home-cooking.png" alt="">
+            <p id="home-text">
+            Home cooking is at the heart of World Book and is designed for everyday life.
+                Users can quickly find recipes that fit their available ingredients and time.
+                The instructions are written in a simple and easy-to-follow format.
+                Meals range from quick breakfasts to full family dinners.
+                The platform encourages healthy habits and confidence in the kitchen.
+                Even beginners can feel comfortable preparing meals with clear guidance.
+            </p>
+        </section>
 
-    <!-- RESTAURANT -->
-    <section>
-        <img id="restaurant-img" src="./images/Restuarant-cooking.png" alt="">
-        <p id="restaurant-text">
-        The restaurant section is designed for chefs and serious food enthusiasts.
-            Recipes are organized by cuisine, course, and cooking technique.
-            This allows professionals to quickly find inspiration or reliable standards.
-            Dishes focus on consistency, quality, and presentation.
-            The section can support menu planning and culinary creativity.
-            It bridges the gap between home cooking and professional kitchens.
-        </p>
-    </section>
-</div>
+        <!-- EVENTS -->
+        <section>
+            <img id="events-img" src="./images/event-cooking.png" alt="">
+            <p id="events-text">
+            World Book provides inspiration for events both large and small.
+                Recipes are grouped by occasion, making planning easier and faster.
+                Users can prepare meals for parties, holidays, or special celebrations.
+                Each dish includes serving suggestions to help with portion planning.
+                The collection balances presentation and practicality.
+                This ensures events feel special without becoming overwhelming.
+            </p>
+        </section>
 
-<section id="demo-section">
-    <h2>Demo Box Section</h2>
-    <div class="box">
-        Box Content
+        <!-- RESTAURANT -->
+        <section>
+            <img id="restaurant-img" src="./images/Restuarant-cooking.png" alt="">
+            <p id="restaurant-text">
+            The restaurant section is designed for chefs and serious food enthusiasts.
+                Recipes are organized by cuisine, course, and cooking technique.
+                This allows professionals to quickly find inspiration or reliable standards.
+                Dishes focus on consistency, quality, and presentation.
+                The section can support menu planning and culinary creativity.
+                It bridges the gap between home cooking and professional kitchens.
+            </p>
+        </section>
     </div>
-    <p>This is a demo section to show a box inside a section. You can move the box, add images, or put text around it. The box has a fixed maximum width and height of 150px, and it stays centered on all devices. You can create multiple boxes in this section if you want to build a grid or a layout of small cards.</p>
-</section>
 
-
-</main>
-
-<footer>
+    <section id="demo-section">
+        <h2>Demo Box Section</h2>
+        <div class="box">
+            Box Content
+        </div>
+        <p>This is a demo section to show a box inside a section. You can move the box, add images, or put text around it. The box has a fixed maximum width and height of 150px, and it stays centered on all devices. You can create multiple boxes in this section if you want to build a grid or a layout of small cards.</p>
+    </section>
+    </main>
+        <div id="food-modal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="modal-caption"></div>
+    </div>
+    <footer>
     <p>&copy; 2026 World Book. All rights reserved.</p>
 </footer>
+<script src="World-book.js" defer></script>
 
 </body>
 </html>
