@@ -1,0 +1,161 @@
+/* Food Website Color Palette */
+:root {
+    --header-footer-bg: #2c3e50;    /* Dark Midnight Blue */
+    --accent-color: #e67e22;        /* Foody Orange for buttons/links */
+    --accent-hover: #d35400;        /* Deeper orange for hover */
+    --bg-color: #fdfaf5;            /* Creamy off-white page background */
+    --text-light: #ecf0f1;          /* Light text for dark backgrounds */
+    --text-dark: #2c3e50;           /* Dark text for forms */
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    color: var(--text-dark);
+}
+
+/* --- HEADER (Midnight Blue) --- */
+header {
+    background-color: var(--header-footer-bg);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav h1 {
+    font-size: 1.6rem;
+    color: var(--white);
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+/* --- FORM CONTAINER --- */
+.form-container {
+    width: 95%;
+    max-width: 400px;
+    margin: 180px auto;
+    padding: 40px;
+    background: var(--white);
+    border-radius: 20px;
+    /* Soft shadow to make the white form pop on creamy background */
+    box-shadow: 0 15px 35px rgba(44, 62, 80, 0.1); 
+    border: 1px solid #eee;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: var(--header-footer-bg);
+}
+
+.switch-text {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.switch-text a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- INPUTS --- */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: var(--accent-color);
+    background-color: #fff;
+}
+
+/* --- PRIMARY BUTTON (Interactive) --- */
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(230, 126, 34, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* --- FOOTER (Midnight Blue) --- */
+footer {
+    background-color: var(--header-footer-bg);
+    color: var(--text-light);
+    text-align: center;
+    padding: 25px;
+    margin-top: auto;
+}
