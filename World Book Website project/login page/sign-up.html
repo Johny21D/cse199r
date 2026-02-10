@@ -11,17 +11,17 @@
         <nav>
             <img src="../images/Logo.png" alt="World Book Logo" id="logo">
             <h1>World Book</h1>
-
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="Images.html">Recipes</a></li>
-                <li><a href="About.html">About Us</a></li>
+                <li><a href="../World-Book.html">Home</a></li>
+                <li><a href="../recipes/recipes.html">Recipes</a></li>
+                <li><a href="../About.html">About Us</a></li>
             </ul>
         </nav>
     </header>
+
     <div class="form-container">
         <h2>Create Account</h2>
-        <form action="/signup" method="POST">
+        <form id="signupForm">
             <div class="input-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -38,8 +38,12 @@
             <p class="switch-text">Already have an account? <a href="login.html">Login</a></p>
         </form>
     </div>
+
     <footer>
         <p>&copy; 2026 World Book. All rights reserved.</p>
     </footer>
+
+    <!-- JS -->
+    <script type="module" src="../auth/signup.js"></script>
 </body>
 </html>
