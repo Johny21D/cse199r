@@ -1,10 +1,6 @@
-import { auth, db } from "./firebase.js";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const signupForm = document.getElementById("signupForm");
 
-const form = document.getElementById("signupForm");
-
-form.addEventListener("submit", async e => {
+signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
@@ -12,15 +8,23 @@ form.addEventListener("submit", async e => {
   const password = document.getElementById("signup-password").value;
 
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+    const response = await fetch("http://localhost:3000/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-    // Save full name in Firestore
-    await setDoc(doc(db, "users", user.uid), { name, email });
+    const data = await response.json();
 
-    alert("Account created successfully!");
-    window.location.href = "login.html";
+    if (response.ok) {
+      alert("Account created successfully!");
+      window.location.href = "login.html";
+    } else {
+      alert(data.message || "Signup failed!");
+    }
+
   } catch (err) {
-    alert(err.message);
+    alert("Could not connect to server. Make sure it is running!");
+    console.error(err);
   }
 });

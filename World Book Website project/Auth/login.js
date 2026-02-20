@@ -1,6 +1,3 @@
-import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
 const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", async (e) => {
@@ -10,10 +7,24 @@ loginForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("login-password").value;
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Login Successful!");
-    window.location.href = "../World-Book.html"; // Send them home
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      alert("Login Successful!");
+      window.location.href = "../World-Book.html";
+    } else {
+      alert(data.message || "Login failed!");
+    }
+
   } catch (err) {
-    alert("Error: " + err.message);
+    alert("Could not connect to server. Make sure it is running!");
+    console.error(err);
   }
 });

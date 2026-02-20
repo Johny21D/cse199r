@@ -1,34 +1,36 @@
-import { auth, db } from "./firebase.js";
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 const authBtn = document.getElementById("authBtn");
 
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    // USER IS LOGGED IN
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-    
-    if (docSnap.exists()) {
-       authBtn.textContent = `Logout (${docSnap.data().name})`;
+const token = localStorage.getItem("token");
+
+if (token) {
+  // USER IS LOGGED IN
+  try {
+    const response = await fetch("http://localhost:3000/profile", {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${token}` },
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      authBtn.textContent = `Logout (${data.user.name})`;
     } else {
-       authBtn.textContent = "Logout";
+      authBtn.textContent = "Logout";
     }
 
-    authBtn.onclick = async (e) => {
+    authBtn.onclick = (e) => {
       e.preventDefault();
-      await signOut(auth);
-      window.location.reload(); // Refresh to show "Login" again
+      localStorage.removeItem("token");
+      window.location.reload();
     };
-  } else {
-    // USER IS LOGGED OUT
-    authBtn.textContent = "Login";
-    authBtn.href = "./login page/login.html";
-    
-    // Optional: Only redirect if they are on a "members only" page
-    // if (window.location.pathname.includes("recipes.html")) { 
-    //    window.location.href = "./login page/login.html"; 
-    // }
+
+  } catch (err) {
+    console.error("Error fetching profile:", err);
+    authBtn.textContent = "Logout";
   }
-});
+
+} else {
+  // USER IS LOGGED OUT
+  authBtn.textContent = "Login";
+  authBtn.href = "./login page/login.html";
+}
