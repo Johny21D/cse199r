@@ -1,35 +1,25 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // Added for file pathing
+const path = require('path');
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const app = express();
 
-// ─── MIDDLEWARE ───────────────────────────────────────────────────────────────
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'], allowedHeaders: ['Content-Type', 'Authorization'] }));
 app.use(express.json());
-
-// ─── FRONTEND CONFIGURATION ──────────────────────────────────────────────────
-// This tells Express to serve images, CSS, and JS from your Public folder
 app.use(express.static(path.join(__dirname, 'Public')));
 
-// This tells Express to show index.html when you go to localhost:3000
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'Public', 'index.html'));
 });
 
-// ─── DATABASE CONNECTION ─────────────────────────────────────────────────────
-const client = new MongoClient(process.env.MONGO_URI, {
-  serverSelectionTimeoutMS: 10000,
-});
-
+// ─── DATABASE ─────────────────────────────────────────────────────────────────
+const client = new MongoClient(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 });
 let db;
 
 async function connectDB() {
@@ -37,48 +27,46 @@ async function connectDB() {
     await client.connect();
     db = client.db('myDatabase');
     console.log('✅ Connected to MongoDB!');
-
-    // Ensure email is unique
     await db.collection('users').createIndex({ email: 1 }, { unique: true });
-
-    // Start server only after DB is connected
     const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`🚀 Server started on http://localhost:${PORT}`);
-    });
-
+    app.listen(PORT, () => console.log(`🚀 Server started on http://localhost:${PORT}`));
   } catch (err) {
     console.error('❌ Error connecting to MongoDB:', err.message);
     process.exit(1);
   }
 }
-
 connectDB();
+
+// ─── EMAIL TRANSPORTER ────────────────────────────────────────────────────────
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
 // ─── AUTH MIDDLEWARE ──────────────────────────────────────────────────────────
 function verifyToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
-
+  if (!token) return res.status(401).json({ message: 'Access denied.' });
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
     res.status(403).json({ message: 'Invalid or expired token.' });
   }
 }
 
-// ─── API ROUTES (Signup / Login / Profile) ───────────────────────────────────
+// ─── SIGNUP ───────────────────────────────────────────────────────────────────
 app.post('/signup', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, phone, password } = req.body;
   if (!name || !email || !password) return res.status(400).json({ message: 'All fields are required.' });
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const users = db.collection('users');
-    await users.insertOne({ name, email, password: hashedPassword, createdAt: new Date() });
+    await db.collection('users').insertOne({ name, email, phone: phone || null, password: hashedPassword, createdAt: new Date() });
     res.status(201).json({ message: 'Account created successfully!' });
   } catch (err) {
     if (err.code === 11000) return res.status(400).json({ message: 'Email already exists!' });
@@ -86,33 +74,90 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+// ─── LOGIN ────────────────────────────────────────────────────────────────────
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) return res.status(400).json({ message: 'Email and password are required.' });
 
   try {
-    const users = db.collection('users');
-    const user = await users.findOne({ email });
+    const user = await db.collection('users').findOne({ email });
     if (!user) return res.status(400).json({ message: 'User not found!' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Wrong password!' });
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.json({ message: 'Login successful!', token });
   } catch (err) {
     res.status(500).json({ message: 'Server error.', error: err.message });
   }
 });
 
+// ─── FORGOT PASSWORD ──────────────────────────────────────────────────────────
+app.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ message: 'Email is required.' });
+
+  try {
+    const user = await db.collection('users').findOne({ email });
+    if (!user) return res.status(400).json({ message: 'No account found with that email.' });
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetExpires = new Date(Date.now() + 3600000); // 1 hour
+
+    await db.collection('users').updateOne(
+      { email },
+      { $set: { resetToken, resetExpires } }
+    );
+
+    // Send email
+    const resetLink = `http://localhost:3000/login-page/reset-password.html?token=${resetToken}&email=${email}`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'World Book - Password Reset',
+      html: `
+        <h2>Password Reset Request</h2>
+        <p>Click the link below to reset your password. This link expires in 1 hour.</p>
+        <a href="${resetLink}" style="background:#e67e22;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">Reset Password</a>
+        <p>If you didn't request this, ignore this email.</p>
+      `
+    });
+
+    res.json({ message: 'Reset link sent to your email!' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.', error: err.message });
+  }
+});
+
+// ─── RESET PASSWORD ───────────────────────────────────────────────────────────
+app.post('/reset-password', async (req, res) => {
+  const { email, token, newPassword } = req.body;
+  if (!email || !token || !newPassword) return res.status(400).json({ message: 'All fields are required.' });
+
+  try {
+    const user = await db.collection('users').findOne({ email, resetToken: token });
+    if (!user) return res.status(400).json({ message: 'Invalid or expired reset link.' });
+    if (new Date() > user.resetExpires) return res.status(400).json({ message: 'Reset link has expired.' });
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await db.collection('users').updateOne(
+      { email },
+      { $set: { password: hashedPassword }, $unset: { resetToken: '', resetExpires: '' } }
+    );
+
+    res.json({ message: 'Password reset successfully!' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error.', error: err.message });
+  }
+});
+
+// ─── PROFILE ──────────────────────────────────────────────────────────────────
 app.get('/profile', verifyToken, async (req, res) => {
   try {
-    const users = db.collection('users');
-    const user = await users.findOne({ email: req.user.email }, { projection: { password: 0 } });
+    const user = await db.collection('users').findOne({ email: req.user.email }, { projection: { password: 0 } });
     if (!user) return res.status(404).json({ message: 'User not found.' });
     res.json({ user });
   } catch (err) {

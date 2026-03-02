@@ -32,13 +32,14 @@ foodAreas.forEach(area => {
     area.addEventListener('click', (e) => {
         e.preventDefault(); 
         
-        const targetUrl = area.getAttribute('data-url');
+        let targetUrl = area.getAttribute('data-url');
 
         if (targetUrl) {
-            // If the area has a URL (The Burger), go to that page
+            if (!targetUrl.startsWith('continents/')) {
+                targetUrl = `continents/${targetUrl}`;
+            }
             window.location.href = targetUrl; 
         } else {
-            // Otherwise, show the big pop-out modal
             popup.style.display = 'none'; 
             modal.style.display = "block";
             modalImg.src = area.getAttribute('data-img');
@@ -59,3 +60,18 @@ window.onclick = (event) => {
         modal.style.display = "none";
     }
 };
+
+// 🔒 Protect this page - redirect to login if not logged in
+const token = localStorage.getItem("token");
+if (!token) {
+    window.location.href = "/login%20page/login.html"; // ✅ FIXED
+}
+
+// 🚪 Logout
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "/login%20page/login.html"; // ✅ FIXED
+    });
+}

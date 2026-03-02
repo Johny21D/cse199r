@@ -1,3 +1,17 @@
+// 👁️ Eye toggle
+document.querySelector('.eye-icon').addEventListener('click', function() {
+    const input = document.getElementById('login-password');
+    const icon = this.querySelector('i');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+});
+
+// 🔐 Login form
 const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", async (e) => {
@@ -18,7 +32,7 @@ loginForm.addEventListener("submit", async (e) => {
     if (response.ok) {
       localStorage.setItem("token", data.token);
       alert("Login Successful!");
-      window.location.href = "../World-Book.html";
+      window.location.href = "/"; // ✅ FIXED
     } else {
       alert(data.message || "Login failed!");
     }
