@@ -1,4 +1,4 @@
-/* Food Website Color Palette */
+
 :root {
     --header-footer-bg: #2c3e50;    /* Dark Midnight Blue */
     --accent-color: #e67e22;        /* Foody Orange for buttons/links */
@@ -20,55 +20,12 @@ body {
     color: var(--text-dark);
 }
 
-/* --- HEADER (Midnight Blue) --- */
-header {
-    background-color: var(--header-footer-bg);
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
 
-#logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-nav h1 {
-    font-size: 1.6rem;
-    color: var(--white);
-    margin: 0;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-light);
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--accent-color);
-}
 
 /* --- FORM CONTAINER --- */
 .form-container {
-    width: 95%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 500px;
     margin: 180px auto;
     padding: 40px;
     background: var(--white);
@@ -170,7 +127,6 @@ h2 {
     transform: translateY(-1px);
 }
 
-/* --- FOOTER (Midnight Blue) --- */
 footer {
     background-color: var(--header-footer-bg);
     color: var(--text-light);
