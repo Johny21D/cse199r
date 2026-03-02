@@ -12,7 +12,6 @@ const modalCaption = document.getElementById('modal-caption');
 const closeBtn = document.querySelector('.close-btn');
 
 foodAreas.forEach(area => {
-    // --- EFFECT 1: HOVER (Small Preview) ---
     area.addEventListener('mouseover', () => {
         popupImg.src = area.getAttribute('data-img');
         popupText.innerText = area.getAttribute('data-info');
@@ -28,7 +27,6 @@ foodAreas.forEach(area => {
         popup.style.display = 'none';
     });
 
-    // --- EFFECT 2: CLICK (Navigate OR Modal) ---
     area.addEventListener('click', (e) => {
         e.preventDefault(); 
         
@@ -61,10 +59,10 @@ window.onclick = (event) => {
     }
 };
 
-// 🔒 Protect this page - redirect to login if not logged in
+// 🔒 Protect this page
 const token = localStorage.getItem("token");
 if (!token) {
-    window.location.href = "/login%20page/login.html"; // ✅ FIXED
+    window.location.href = "/login-page/login.html"; // ✅ FIXED
 }
 
 // 🚪 Logout
@@ -72,6 +70,6 @@ const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("token");
-        window.location.href = "/login%20page/login.html"; // ✅ FIXED
+        window.location.href = "/login-page/login.html"; // ✅ FIXED
     });
 }

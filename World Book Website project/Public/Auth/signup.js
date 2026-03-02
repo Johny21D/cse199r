@@ -33,7 +33,7 @@ signupForm.addEventListener("submit", async (e) => {
 
         if (response.ok) {
             alert("Account created successfully!");
-            window.location.href = "login.html";
+            window.location.href = "/login-page/login.html";
         } else {
             alert(data.message || "Signup failed!");
         }
