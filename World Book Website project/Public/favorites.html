@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="favorites.css"> 
+</head>
+<body>
+<header>
+    <nav>
+        <h1>World Book</h1>
+        <button class="burger" id="burgerBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes/recipes.html">Recipes</a></li>
+            <li><a href="About.html">About Us</a></li>
+            <li><a href="favorites.html"> Favorites</a></li>
+            <li><a href="login-page/login.html" id="authBtn" class="nav-login-btn">Login</a></li>
+            <li><button id="logoutBtn">Logout</button></li>
+        </ul>
+    </nav>
+</header>
+
+  <!-- HERO -->
+  <div class="fav-hero">
+    <h1>❤️ My Favorites</h1>
+    <p>Your personal collection of saved recipes</p>
+    <span class="fav-count" id="favCount">0 recipes saved</span>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="fav-toolbar">
+    <div class="fav-search">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="favSearch" placeholder="Search your favorites…">
+    </div>
+    <button class="clear-all-btn" id="clearAllBtn">🗑 Clear All</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="fav-grid" id="favGrid"></div>
+
+  <!-- EMPTY STATE -->
+  <div class="fav-empty" id="favEmpty">
+    <span class="fav-empty-icon">🍽️</span>
+    <h2>No favorites yet!</h2>
+    <p>Browse recipes and click the ♡ heart button to save them here.</p>
+    <a href="/recipes/recipes.html" class="btn-browse">Browse Recipes</a>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+<footer>
+    <p>&copy; 2026 World Book. All rights reserved.</p>
+</footer>
+<script src="favorites.js" defer></script>
+</body>
+</html>

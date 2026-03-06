@@ -62,7 +62,8 @@ window.onclick = (event) => {
 // 🔒 Protect this page
 const token = localStorage.getItem("token");
 if (!token) {
-    window.location.href = "/login-page/login.html"; // ✅ FIXED
+    // Ensuring the path matches your folder structure: "login page/login.html"
+    window.location.href = "/login-page/login.html"; 
 }
 
 // 🚪 Logout
@@ -70,6 +71,55 @@ const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("token");
-        window.location.href = "/login-page/login.html"; // ✅ FIXED
+        window.location.href = "/login-page/login.html"; 
+    });
+}
+
+// 🔍 Search Bar Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('recipeSearch');
+    const searchBtn = document.getElementById('searchBtn');
+
+    const handleSearch = () => {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        if (query === "") {
+            alert("Please enter a food name!");
+            return;
+        }
+
+        // Redirects to recipes.html with the search query in the URL
+        window.location.href = `recipes/recipes.html?search=${encodeURIComponent(query)}`;
+    };
+
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+    }
+});
+
+// 🍔 Burger Menu
+const burgerBtn = document.getElementById('burgerBtn');
+const navMenu = document.getElementById('navMenu');
+
+if (burgerBtn) {
+    burgerBtn.addEventListener('click', () => {
+        burgerBtn.classList.toggle('open');
+        navMenu.classList.toggle('open');
+    });
+
+    // Close menu when a link is clicked
+    navMenu.querySelectorAll('a, button').forEach(item => {
+        item.addEventListener('click', () => {
+            burgerBtn.classList.remove('open');
+            navMenu.classList.remove('open');
+        });
     });
 }

@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,16 +8,22 @@
 </head>
 
 <body>
-
 <header>
     <nav>
-        <img src="./images/Logo.png" alt="World Book Logo" id="logo">
         <h1>World Book</h1>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Images.html">Recipes</a></li>
-            <li><a href="About.html">About Us</a></li>
+        <button class="burger" id="burgerBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul id="navMenu">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/recipes/recipes.html">Recipes</a></li>
+            <li><a href="/About-us.html">About Us</a></li>
+            <li><a href="/login-page/login.html" id="authBtn" class="nav-login-btn">Login</a></li>
+            <li><button id="logoutBtn">Logout</button></li>
         </ul>
     </nav>
 </header>

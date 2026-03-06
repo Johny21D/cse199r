@@ -9,25 +9,35 @@
 
 <body>
 
-    <header>
-        <nav>
-            <img src="images/Logo.png" alt="World Book Logo" id="logo">
-            <h1>World Book</h1>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="recipes/recipes.html">Recipes</a></li> 
-                <li><a href="About.html">About Us</a></li>
-                <li><a href="login page/login.html" id="authBtn" class="nav-login-btn">Login</a></li>
-                <li><button id="logoutBtn">Logout</button></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <nav>
+        <h1>World Book</h1>
+
+        <!-- Burger button: spans = the 3 visual lines only -->
+        <button class="burger" id="burgerBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Nav links stay OUTSIDE the button, in their own ul -->
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes/recipes.html">Recipes</a></li>
+            <li><a href="favorites.html"> Favorites</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="/login-page/login.html" id="authBtn" class="nav-login-btn">Login</a></li>
+            <li><button id="logoutBtn">Logout</button></li>
+        </ul>
+    </nav>
+</header>
 
     <main>
 
-    <h2>
-        A world book of recipes that helps users quickly find and cook the right dish for home, events, or restaurant use.
-    </h2>
+    <div class="search-container">
+    <input type="text" id="recipeSearch">
+    <button id="searchBtn">Search</button>
+    </div>  
     <section>
     <div class="map-container">
             <img id="purpose-img" src="./images/Food-in-different-continents.png" usemap="#food-map" alt="World Map">

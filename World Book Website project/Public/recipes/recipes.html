@@ -7,18 +7,26 @@
     <link rel="stylesheet" href="recipes.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <h1>World Book</h1>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="recipes.html">Countries Recipes</a></li>
-                <li><a href="About.html">About Us</a></li>
-                <li><a href="../login page/login.html" id="authBtn" class="nav-login-btn">Login</a></li>
+<header>
+    <nav>
+        <h1>World Book</h1>
 
-            </ul>
-        </nav>
-    </header>
+        <button class="burger" id="burgerBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul id="navMenu">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/recipes/recipes.html">Recipes</a></li>
+            <li><a href="../favorites.html"> Favorites</a></li>
+            <li><a href="/About-us.html">About Us</a></li>
+            <li><a href="/login-page/login.html" id="authBtn" class="nav-login-btn">Login</a></li>
+            <li><button id="logoutBtn">Logout</button></li>
+        </ul>
+    </nav>
+</header>
 
 <main class="recipe-page">
     <h2 class="page-title">World Recipe Library</h2>
@@ -27,5 +35,6 @@
 <script src="recipes-data.js" defer></script>
 
 <script src="recipe-logic.js" defer></script>
+
 </body>
 </html>

@@ -70,7 +70,7 @@ const countries = [
 const allRecipes = {
 
 "cambodia": [
-        { name: "Fish Amok", time: "45 mins", region: "Southeast Asia", img: "./images/asia/fish-amok.png", ingredients: ["White fish", "Khmer Kroeung", "Coconut cream", "Noni leaves"], instructions: ["Steam fish with curry paste and cream in banana leaf cups."] },
+        { name: "Fish Amok", time: "45 mins", region: "Southeast Asia", img: "./images/asia/fish-amok.png", ingredients: ["500g Snakehead or River Catfish (sliced)", "Kroeung Paste (Lemongrass, turmeric, galangal, kaffir lime, garlic, shallots)", "250ml Coconut cream", "Noni leaves or cabbage", "Egg, fish sauce, palm sugar, kapi"], instructions: ["Mix spice paste with coconut cream, seasonings, and egg.", "Fold in fish slices and marinate for 15 mins.", "Line banana leaf cups with noni leaves and add fish mixture.", "Steam for 20-30 mins, garnish with thick cream and kaffir lime leaves."] },
         { name: "Beef Lok Lak", time: "20 mins", region: "Southeast Asia", img: "./images/asia/beef-lok-lak.png", ingredients: ["Beef tenderloin", "Oyster sauce", "Lime", "Black pepper", "Lettuce"], instructions: ["Stir-fry beef quickly; serve with lime-pepper dipping sauce."] },
         { name: "Nom Banh Chok", time: "1 hour", region: "Southeast Asia", img: "./images/asia/nom-banh-chok.png", ingredients: ["Rice noodles", "Fish gravy", "Lemongrass", "Bean sprouts"], instructions: ["Top rice noodles with green fish gravy and fresh herbs."] },
         { name: "Bai Sach Chrouk", time: "30 mins", region: "Southeast Asia", img: "./images/asia/pork-rice.png", ingredients: ["Pork", "Coconut milk", "Garlic", "Broken rice"], instructions: ["Grill marinated pork and serve over rice with pickles."] },
