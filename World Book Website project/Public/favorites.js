@@ -109,6 +109,15 @@ function closeRecipeModal() {
   document.body.style.overflow = '';
 }
 
+// Safe modal opener using data-id instead of inline JSON
+const modalDataStore = {};
+
+function openRecipeModalById(btn) {
+  const id = btn.getAttribute('data-id');
+  const r = modalDataStore[id];
+  if (r) openRecipeModal(r);
+}
+
 // ── RENDER ─────────────────────────────────────────────────────────
 function renderFavorites(filter = '') {
   const grid = document.getElementById('favGrid');
@@ -132,6 +141,9 @@ function renderFavorites(filter = '') {
     return;
   }
 
+      // Store each recipe safely by id
+    favs.forEach(r => { modalDataStore[r.id] = r; });
+
   grid.style.display = 'grid';
   empty.style.display = 'none';
 
@@ -151,7 +163,7 @@ function renderFavorites(filter = '') {
           ${r.servings ? `<span>🍽 ${r.servings}</span>` : ''}
         </div>
         <div class="fav-card-actions">
-          <button class="btn-view" onclick='openRecipeModal(${JSON.stringify(r)})'>View Recipe</button>
+          <button class="btn-view" data-id="${r.id}" onclick="openRecipeModalById(this)">View Recipe</button>
           <button class="btn-remove" onclick="handleRemove('${r.id}')" title="Remove from favorites">🗑</button>
         </div>
       </div>

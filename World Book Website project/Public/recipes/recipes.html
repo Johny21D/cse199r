@@ -30,11 +30,28 @@
 
 <main class="recipe-page">
     <h2 class="page-title">World Recipe Library</h2>
+
+    <div class="search-wrapper">
+        <input
+            type="text"
+            id="countrySearch"
+            class="country-search"
+            placeholder="Search for a country..."
+            autocomplete="off"
+        />
+    </div>
+
     <div class="country-grid" id="recipe-display-area"></div>
+
+    <p class="no-results" id="noResults" style="display:none;">
+        No countries found. Try a different search.
+    </p>
 </main>
 <script src="recipes-data.js" defer></script>
 
 <script src="recipe-logic.js" defer></script>
+
+
 
 </body>
 </html>

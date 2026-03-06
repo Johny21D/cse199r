@@ -5,6 +5,34 @@
 body.recipe-active nav ul li {
     display: block;
 }
+
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.country-search {
+    width: 100%;
+    max-width: 480px;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.country-search:focus {
+    border-color: #555;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    margin-top: 2rem;
+    font-size: 1rem;
+}
 /* 1. Page Layout */
 .recipe-page {
     max-width: 1200px; 

@@ -15,17 +15,21 @@ function isFavorite(id) {
 function toggleFavorite(id) {
   const favs = getFavorites();
   const recipe = recipeRegistry[id];
-  if (!recipe) return false;
 
   const exists = favs.find(f => f.id === id);
   if (exists) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favs.filter(f => f.id !== id)));
     return false;
-  } else {
-    favs.unshift(recipe);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
-    return true;
   }
+
+  if (!recipe) {
+    console.warn('Recipe not found in registry:', id);
+    return false;
+  }
+
+  favs.unshift(recipe);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+  return true;
 }
 
 function makeRecipeId(country, name) {
@@ -104,8 +108,6 @@ function registerRecipe(country, recipe) {
 }
 
 // ── SHARED CARD BUILDER ────────────────────────────────────────────
-// Builds the full HTML string for one recipe card including
-// collapsible Ingredients AND Instructions sections.
 function buildCardHTML(recipe, countryKey, showCountryLabel) {
   const id = registerRecipe(countryKey, recipe);
 
@@ -129,7 +131,7 @@ function buildCardHTML(recipe, countryKey, showCountryLabel) {
     <section class="region-section">
       <div class="card-image-wrap">
         <img src="${recipe.img}" class="recipe-img" alt="${recipe.name}"
-             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23aaa%22 font-size=%2216%22%3ENo Image%3C/text%3E%3C/svg%3E'"
+             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23aaa%22 font-size=%2216%22%3ENo Image%3C/text%3E%3C/svg%3E'">
         ${heartBtn(id)}
       </div>
 
@@ -141,13 +143,11 @@ function buildCardHTML(recipe, countryKey, showCountryLabel) {
           <span class="time-label">⏱ ${recipe.time || '—'}</span>
         </div>
 
-        <!-- Ingredients (open by default) -->
         <details class="card-section" open>
           <summary class="card-section-toggle">🧂 Ingredients</summary>
           <ul class="ingredients-list">${ingredientsHTML}</ul>
         </details>
 
-        <!-- Instructions (collapsed by default) -->
         <details class="card-section">
           <summary class="card-section-toggle">👨‍🍳 Instructions</summary>
           <ol class="instructions-list">${instructionsHTML}</ol>
@@ -251,6 +251,7 @@ if (displayArea) {
       continents[continentName].forEach(country => {
         const card = document.createElement('div');
         card.className = 'country-card';
+        card.dataset.country = country.name.toLowerCase(); // ← ADDED
         card.innerHTML = `
           <a href="?country=${encodeURIComponent(country.name.toLowerCase())}">
             <img src="https://flagcdn.com/w320/${country.code.toLowerCase()}.png"
@@ -269,7 +270,6 @@ if (displayArea) {
 // ── DYNAMIC STYLES ─────────────────────────────────────────────────
 const style = document.createElement('style');
 style.textContent = `
-  /* ── Heart button ── */
   .card-image-wrap { position: relative; }
   .heart-btn {
     position: absolute; top: 8px; right: 8px;
@@ -282,7 +282,6 @@ style.textContent = `
   .heart-btn:hover { transform: scale(1.2); }
   .heart-btn.faved { background: #fff0ed; }
 
-  /* ── Card body ── */
   .card-body { padding: 14px 16px 16px; }
   .card-title {
     font-size: 1.05rem; font-weight: 700;
@@ -298,7 +297,6 @@ style.textContent = `
   }
   .time-label { font-size: 0.82rem; color: #888; }
 
-  /* ── Collapsible sections ── */
   .card-section {
     border: 1px solid #f0f0f0; border-radius: 8px;
     overflow: hidden; margin-top: 8px;
@@ -318,7 +316,6 @@ style.textContent = `
   details[open] .card-section-toggle::after { transform: rotate(-180deg); }
   .card-section-toggle:hover { background: #f0f0f0; }
 
-  /* ── Ingredients ── */
   .ingredients-list {
     list-style: none; margin: 0; padding: 10px 14px 12px;
     display: flex; flex-direction: column; gap: 5px;
@@ -332,7 +329,6 @@ style.textContent = `
     color: #e67e22; font-weight: 700;
   }
 
-  /* ── Instructions ── */
   .instructions-list {
     list-style: none; margin: 0; padding: 10px 14px 14px;
     display: flex; flex-direction: column; gap: 10px;
@@ -378,3 +374,34 @@ if (logoutBtn) {
     window.location.href = '/login-page/login.html';
   });
 }
+
+// ── SEARCH ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('countrySearch');
+  const noResults   = document.getElementById('noResults');
+
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('#recipe-display-area .country-card');
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const countryName = (card.dataset.country || card.textContent).toLowerCase();
+      const match = countryName.includes(query);
+      card.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    // Hide continent headings when all their cards are hidden
+    document.querySelectorAll('.continent-section').forEach(section => {
+      const hasVisible = [...section.querySelectorAll('.country-card')]
+        .some(c => c.style.display !== 'none');
+      section.style.display = hasVisible ? '' : 'none';
+    });
+
+    if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+  });
+});
