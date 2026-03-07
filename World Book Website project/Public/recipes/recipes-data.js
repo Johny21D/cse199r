@@ -93,8 +93,8 @@ const countries = [
   { continent: "Asia", region: "East Asia",         name: "China",                    code: "cn" },
   { continent: "Asia", region: "East Asia",         name: "Indonesia",                code: "id" },
   { continent: "Asia", region: "East Asia",         name: "Japan",                    code: "jp" },
-  { continent: "Asia", region: "East Asia",         name: "Korea, North",             code: "kp" },
-  { continent: "Asia", region: "East Asia",         name: "Korea, South",             code: "kr" },
+  { continent: "Asia", region: "East Asia",         name: "North Korea",              code: "kp" },
+  { continent: "Asia", region: "East Asia",         name: "South Korea",              code: "kr" },
   { continent: "Asia", region: "East Asia",         name: "Laos",                     code: "la" },
   { continent: "Asia", region: "East Asia",         name: "Malaysia",                 code: "my" },
   { continent: "Asia", region: "East Asia",         name: "Mongolia",                 code: "mn" },
@@ -604,7 +604,7 @@ const allRecipes = {
         { name: "Gaymar", time: "12 hours", region: "National", img: "./images/iq/gaymar.png", ingredients: ["Buffalo milk", "Cream"], instructions: ["Slowly heat full-fat buffalo milk over low heat for several hours.", "Allow the milk to cool undisturbed overnight in a cool place.", "Skim the thick, clotted cream that forms on the surface.", "Serve with honey and fresh bread for breakfast."] }
     ],
 
-    "uae": [
+    "united arab emirates": [
         { name: "Al Harees", time: "3 hours", region: "National", img: "./images/ae/harees.png", ingredients: ["Wheat", "Veal or Chicken", "Salt", "Ghee"], instructions: ["Soak wheat overnight and boil with meat in salted water until very soft.", "Remove bones and use a heavy wooden spoon to beat the mixture into a thick paste.", "Continue mashing until the meat and wheat are completely integrated.", "Serve flat on a plate with a well of melted ghee in the center."] },
         { name: "Al Machboos", time: "1 hour", region: "National", img: "./images/ae/machboos.png", ingredients: ["Chicken or Lamb", "Basmati rice", "Bezar spice mix", "Dried lime", "Onion"], instructions: ["Sauté meat with Bezar spices, onions, and garlic until aromatic.", "Add water and dried limes, simmering until the meat is tender.", "Wash rice and cook it directly in the spiced meat broth.", "Serve on a platter with the meat on top, garnished with fried onions."] },
         { name: "Luqaimat", time: "40 mins", region: "National", img: "./images/ae/luqaimat.png", ingredients: ["Flour", "Yeast", "Saffron", "Date syrup", "Sesame seeds"], instructions: ["Mix flour, yeast, and saffron into a smooth, elastic batter and let rise.", "Drop small spheres of batter into hot oil and fry until golden and crunchy.", "Drain the dumplings and immediately toss them in warm date syrup.", "Sprinkle with toasted sesame seeds and serve warm."] },
@@ -994,7 +994,7 @@ const allRecipes = {
         { name: "Luchi Alur Dom", time: "40 mins", region: "National", img: "./images/bd/luchi.png", ingredients: ["Flour", "Potatoes", "Tomato", "Cumin"], instructions: ["Deep-fry soft flour discs (Luchi).", "Prepare a thick, spicy potato curry (Alur Dom).", "A classic Bengali breakfast."] }
     ],
 
-    "sri_lanka": [
+    "sri lanka": [
         { name: "Fish Ambul Thiyal", time: "45 mins", region: "Southern", img: "./images/lk/ambulthiyal.png", ingredients: ["Tuna", "Goraka (Garcinia)", "Black pepper", "Curry leaves"], instructions: ["Cube fresh tuna and coat in a thick paste of ground black pepper and Goraka fruit.", "The Goraka provides a unique sourness and preserves the fish.", "Simmer in a clay pot with very little water until the fish is dry and dark.", "Commonly eaten with rice or hoppers."] },
         { name: "Kottu Parrot", time: "30 mins", region: "National", img: "./images/lk/kottu.png", ingredients: ["Godamba roti", "Eggs", "Vegetables", "Chicken curry"], instructions: ["Finely chop Godamba roti into small strips.", "Stir-fry with eggs, vegetables, and leftover chicken curry on a hot griddle.", "The signature rhythmic metal clashing sound during preparation is iconic to Sri Lankan street food."] },
         { name: "Hoppers (Appa)", time: "40 mins", region: "National", img: "./images/lk/hoppers.png", ingredients: ["Rice flour", "Coconut milk", "Yeast/Toddy"], instructions: ["Prepare a fermented batter of rice flour and coconut milk.", "Swirl the batter in a small, deep 'appa chatti' pan to create a bowl-shaped pancake with crispy edges.", "Optionally crack an egg in the center (Egg Hopper)."] },
@@ -1132,30 +1132,30 @@ const allRecipes = {
         { name: "Egg Fried Rice", time: "15 mins", region: "National", img: "./images/china/fried-rice.png", ingredients: ["Day-old rice", "Eggs", "Spring onions", "Soy sauce"], instructions: ["Scramble eggs", "Toss with cold rice on high heat"] },
         { name: "Rice Congee", time: "1.5 hours", region: "National", img: "./images/china/congee.png", ingredients: ["Rice", "Stock", "Ginger", "Century egg"], instructions: ["Boil rice until porridge consistency", "Top with savory garnishes"] }
     ],
-        "south_korea": [
-    { name: "Bibimbap", time: "45 mins", region: "National", img: "./images/korea/bibimbap.png", ingredients: ["Rice", "Beef", "Gochujang", "Assorted Vegetables"], instructions: ["Sauté veg", "Place on rice", "Add egg and spicy paste", "Mix well"] },
-    { name: "Bulgogi", time: "30 mins", region: "National", img: "./images/korea/bulgogi.png", ingredients: ["Beef ribeye", "Soy sauce", "Pear juice", "Sesame oil"], instructions: ["Marinate thin beef", "Grill or stir-fry at high heat"] },
-    { name: "Kimchi Jjigae", time: "30 mins", region: "National", img: "./images/korea/kimchi-jjigae.png", ingredients: ["Aged Kimchi", "Pork belly", "Tofu", "Green onion"], instructions: ["Sauté pork and kimchi", "Boil with tofu until rich and spicy"] },
-    { name: "Tteokbokki", time: "25 mins", region: "National", img: "./images/korea/tteokbokki.png", ingredients: ["Rice cakes", "Gochujang", "Fish cakes", "Sugar"], instructions: ["Simmer rice cakes in spicy sauce until chewy and thick"] },
-    { name: "Japchae", time: "40 mins", region: "National", img: "./images/korea/japchae.png", ingredients: ["Glass noodles", "Spinach", "Beef", "Carrots", "Sesame oil"], instructions: ["Boil noodles", "Sauté veg and meat separately", "Toss together"] },
-    { name: "Korean Fried Chicken", time: "50 mins", region: "National", img: "./images/korea/fried-chicken.png", ingredients: ["Chicken", "Cornstarch", "Gochujang", "Garlic"], instructions: ["Double fry chicken for extra crunch", "Glaze with spicy-sweet sauce"] },
-    { name: "Galbi", time: "45 mins", region: "National", img: "./images/korea/galbi.png", ingredients: ["Beef short ribs", "Soy sauce", "Garlic", "Ginger"], instructions: ["Marinate ribs", "Grill over charcoal until caramelized"] },
-    { name: "Samgyeopsal", time: "20 mins", region: "National", img: "./images/korea/samgyeopsal.png", ingredients: ["Pork belly", "Lettuce", "Ssamjang", "Garlic"], instructions: ["Grill thick pork slices", "Wrap in lettuce with sauce"] },
-    { name: "Sundubu Jjigae", time: "25 mins", region: "National", img: "./images/korea/sundubu.png", ingredients: ["Soft tofu", "Clams", "Chili flakes", "Egg"], instructions: ["Boil spicy broth with seafood", "Add soft tofu and crack an egg"] },
-    { name: "Kimbap", time: "50 mins", region: "National", img: "./images/korea/kimbap.png", ingredients: ["Seaweed", "Rice", "Pickled radish", "Egg", "Carrot"], instructions: ["Roll ingredients in rice and seaweed", "Slice into rounds"] },
-    { name: "Doenjang Jjigae", time: "30 mins", region: "National", img: "./images/korea/doenjang.png", ingredients: ["Soybean paste", "Anchovy broth", "Zucchini", "Tofu"], instructions: ["Boil earthy soybean broth with vegetables and tofu"] },
-    { name: "Jajangmyeon", time: "40 mins", region: "Incheon", img: "./images/korea/jajangmyeon.png", ingredients: ["Noodles", "Black bean paste", "Pork", "Onion"], instructions: ["Fry paste with pork/onions", "Pour over thick wheat noodles"] },
-    { name: "Mandu", time: "1 hour", region: "National", img: "./images/korea/mandu.png", ingredients: ["Ground pork", "Chives", "Kimchi", "Wrappers"], instructions: ["Stuff wrappers with filling", "Steam, fry, or boil"] },
-    { name: "Haemul Pajeon", time: "20 mins", region: "National", img: "./images/korea/pajeon.png", ingredients: ["Green onions", "Seafood mix", "Flour", "Egg"], instructions: ["Make a batter with scallions and seafood", "Pan-fry until crispy"] },
-    { name: "Bossam", time: "1.5 hours", region: "National", img: "./images/korea/bossam.png", ingredients: ["Pork shoulder", "Boiling spices", "Radish kimchi"], instructions: ["Boil pork with coffee/ginger until tender", "Slice and wrap in cabbage"] },
-    { name: "Samgyetang", time: "1.5 hours", region: "National", img: "./images/korea/samgyetang.png", ingredients: ["Whole young chicken", "Ginseng", "Jujube", "Sticky rice"], instructions: ["Stuff chicken with rice", "Simmer with ginseng until broth is milky"] },
-    { name: "Yukgaejang", time: "1.5 hours", region: "National", img: "./images/korea/yukgaejang.png", ingredients: ["Beef", "Fernbrake", "Bean sprouts", "Chili oil"], instructions: ["Simmer shredded beef in a very spicy, hearty broth"] },
-    { name: "Naengmyeon", time: "30 mins", region: "North Korea", img: "./images/korea/naengmyeon.png", ingredients: ["Buckwheat noodles", "Chilled broth", "Pear", "Cucumber"], instructions: ["Serve chewy noodles in ice-cold tangy beef broth"] },
-    { name: "Dakgalbi", time: "35 mins", region: "Chuncheon", img: "./images/korea/dakgalbi.png", ingredients: ["Chicken", "Cabbage", "Gochujang", "Rice cakes"], instructions: ["Stir-fry spicy marinated chicken and veg in a large pan"] },
-    { name: "Kimchi Fried Rice", time: "15 mins", region: "National", img: "./images/korea/kimchi-rice.png", ingredients: ["Rice", "Kimchi", "Spam or Tuna", "Fried egg"], instructions: ["Sauté kimchi and meat", "Add rice", "Top with sunny-side-up egg"] }
-    ],
+    "south korea": [
+        { name: "Bibimbap", time: "45 mins", region: "National", img: "./images/korea/bibimbap.png", ingredients: ["Rice", "Beef", "Gochujang", "Assorted Vegetables"], instructions: ["Sauté veg", "Place on rice", "Add egg and spicy paste", "Mix well"] },
+        { name: "Bulgogi", time: "30 mins", region: "National", img: "./images/korea/bulgogi.png", ingredients: ["Beef ribeye", "Soy sauce", "Pear juice", "Sesame oil"], instructions: ["Marinate thin beef", "Grill or stir-fry at high heat"] },
+        { name: "Kimchi Jjigae", time: "30 mins", region: "National", img: "./images/korea/kimchi-jjigae.png", ingredients: ["Aged Kimchi", "Pork belly", "Tofu", "Green onion"], instructions: ["Sauté pork and kimchi", "Boil with tofu until rich and spicy"] },
+        { name: "Tteokbokki", time: "25 mins", region: "National", img: "./images/korea/tteokbokki.png", ingredients: ["Rice cakes", "Gochujang", "Fish cakes", "Sugar"], instructions: ["Simmer rice cakes in spicy sauce until chewy and thick"] },
+        { name: "Japchae", time: "40 mins", region: "National", img: "./images/korea/japchae.png", ingredients: ["Glass noodles", "Spinach", "Beef", "Carrots", "Sesame oil"], instructions: ["Boil noodles", "Sauté veg and meat separately", "Toss together"] },
+        { name: "Korean Fried Chicken", time: "50 mins", region: "National", img: "./images/korea/fried-chicken.png", ingredients: ["Chicken", "Cornstarch", "Gochujang", "Garlic"], instructions: ["Double fry chicken for extra crunch", "Glaze with spicy-sweet sauce"] },
+        { name: "Galbi", time: "45 mins", region: "National", img: "./images/korea/galbi.png", ingredients: ["Beef short ribs", "Soy sauce", "Garlic", "Ginger"], instructions: ["Marinate ribs", "Grill over charcoal until caramelized"] },
+        { name: "Samgyeopsal", time: "20 mins", region: "National", img: "./images/korea/samgyeopsal.png", ingredients: ["Pork belly", "Lettuce", "Ssamjang", "Garlic"], instructions: ["Grill thick pork slices", "Wrap in lettuce with sauce"] },
+        { name: "Sundubu Jjigae", time: "25 mins", region: "National", img: "./images/korea/sundubu.png", ingredients: ["Soft tofu", "Clams", "Chili flakes", "Egg"], instructions: ["Boil spicy broth with seafood", "Add soft tofu and crack an egg"] },
+        { name: "Kimbap", time: "50 mins", region: "National", img: "./images/korea/kimbap.png", ingredients: ["Seaweed", "Rice", "Pickled radish", "Egg", "Carrot"], instructions: ["Roll ingredients in rice and seaweed", "Slice into rounds"] },
+        { name: "Doenjang Jjigae", time: "30 mins", region: "National", img: "./images/korea/doenjang.png", ingredients: ["Soybean paste", "Anchovy broth", "Zucchini", "Tofu"], instructions: ["Boil earthy soybean broth with vegetables and tofu"] },
+        { name: "Jajangmyeon", time: "40 mins", region: "Incheon", img: "./images/korea/jajangmyeon.png", ingredients: ["Noodles", "Black bean paste", "Pork", "Onion"], instructions: ["Fry paste with pork/onions", "Pour over thick wheat noodles"] },
+        { name: "Mandu", time: "1 hour", region: "National", img: "./images/korea/mandu.png", ingredients: ["Ground pork", "Chives", "Kimchi", "Wrappers"], instructions: ["Stuff wrappers with filling", "Steam, fry, or boil"] },
+        { name: "Haemul Pajeon", time: "20 mins", region: "National", img: "./images/korea/pajeon.png", ingredients: ["Green onions", "Seafood mix", "Flour", "Egg"], instructions: ["Make a batter with scallions and seafood", "Pan-fry until crispy"] },
+        { name: "Bossam", time: "1.5 hours", region: "National", img: "./images/korea/bossam.png", ingredients: ["Pork shoulder", "Boiling spices", "Radish kimchi"], instructions: ["Boil pork with coffee/ginger until tender", "Slice and wrap in cabbage"] },
+        { name: "Samgyetang", time: "1.5 hours", region: "National", img: "./images/korea/samgyetang.png", ingredients: ["Whole young chicken", "Ginseng", "Jujube", "Sticky rice"], instructions: ["Stuff chicken with rice", "Simmer with ginseng until broth is milky"] },
+        { name: "Yukgaejang", time: "1.5 hours", region: "National", img: "./images/korea/yukgaejang.png", ingredients: ["Beef", "Fernbrake", "Bean sprouts", "Chili oil"], instructions: ["Simmer shredded beef in a very spicy, hearty broth"] },
+        { name: "Naengmyeon", time: "30 mins", region: "North Korea", img: "./images/korea/naengmyeon.png", ingredients: ["Buckwheat noodles", "Chilled broth", "Pear", "Cucumber"], instructions: ["Serve chewy noodles in ice-cold tangy beef broth"] },
+        { name: "Dakgalbi", time: "35 mins", region: "Chuncheon", img: "./images/korea/dakgalbi.png", ingredients: ["Chicken", "Cabbage", "Gochujang", "Rice cakes"], instructions: ["Stir-fry spicy marinated chicken and veg in a large pan"] },
+        { name: "Kimchi Fried Rice", time: "15 mins", region: "National", img: "./images/korea/kimchi-rice.png", ingredients: ["Rice", "Kimchi", "Spam or Tuna", "Fried egg"], instructions: ["Sauté kimchi and meat", "Add rice", "Top with sunny-side-up egg"] }
+        ],
 
-    "north_korea": [
+    "north korea": [
         { name: "Pyongyang Naengmyeon", time: "1 hour", region: "Pyongyang", img: "./images/kp/naengmyeon.png", ingredients: ["Buckwheat noodles", "Beef broth", "Dongchimi (radish water) brine", "Pear", "Boiled egg"], instructions: ["Simmer beef and aromatics for a clear broth, then mix with chilled radish water brine.", "Boil buckwheat noodles until chewy and immediately shock in ice water.", "Place noodles in a bowl and pour the ice-cold broth over them.", "Top with thin slices of beef, Korean pear, and a boiled egg."] },
         { name: "Injo Gogi Bap", time: "30 mins", region: "National", img: "./images/kp/injogogi.png", ingredients: ["Soybean paste skin", "Rice", "Chili sauce"], instructions: ["Fill tubes of rehydrated soybean protein skin with seasoned steamed rice.", "Steam the rolls briefly to meld the flavors.", "Drizzle with a pungent, spicy chili oil sauce.", "Commonly sold as a popular street food in North Korean markets."] },
         { name: "Dubu-bap", time: "25 mins", region: "National", img: "./images/kp/dububap.png", ingredients: ["Tofu", "Rice", "Chili paste", "Soy sauce"], instructions: ["Slice tofu into triangles and deep-fry until the exterior is golden and hollow.", "Slit the tofu and stuff the pocket with seasoned rice.", "Top the rice with a spicy mixture of soy sauce and chili flakes.", "Serve as a filling snack or lunch."] },
@@ -1365,7 +1365,7 @@ const allRecipes = {
     ],
 
     // Northern Europe
-    "united_kingdom": [
+    "united kingdom": [
         { name: "Fish and Chips", time: "45 mins", region: "National", img: "./images/uk/fish-chips.png", ingredients: ["Cod", "Flour", "Beer", "Potatoes"], instructions: ["Deep-fry battered fish and thick-cut potatoes"] },
         { name: "Sunday Roast", time: "2.5 hours", region: "National", img: "./images/uk/sunday-roast.png", ingredients: ["Beef", "Potatoes", "Carrots", "Gravy"], instructions: ["Roast meat and veg; serve with Yorkshire pudding and gravy"] },
         { name: "Shepherd’s Pie", time: "1 hour", region: "National", img: "./images/uk/shepherds-pie.png", ingredients: ["Ground lamb", "Potatoes", "Peas", "Carrots"], instructions: ["Top seasoned lamb with mashed potatoes and bake until brown"] },
@@ -1827,7 +1827,7 @@ const allRecipes = {
             { name: "Mucenici", time: "1 hour", region: "National", img: "./images/ro/mucenici.png", ingredients: ["Dough", "Honey", "Walnuts"], instructions: ["Eight-shaped pastries eaten in March."] }
         ],
 
-        "czech_republic": [
+        "czech republic": [
             { name: "Svíčková na Smetaně", time: "3 hours", region: "National", img: "./images/cz/svickova.png", ingredients: ["Beef sirloin", "Root vegetables", "Cream", "Cranberries"], instructions: ["Slow-roast beef with vegetables, then puree the veg into a creamy sauce.", "Serve with bread dumplings, a slice of lemon, and cranberry jam."] },
             { name: "Vepřo-knedlo-zelo", time: "2 hours", region: "National", img: "./images/cz/vepro.png", ingredients: ["Pork roast", "Bread dumplings", "Sauerkraut"], instructions: ["The trinity of Czech cuisine: Roasted pork, dumplings, and cabbage."] },
             { name: "Guláš (Czech style)", time: "2.5 hours", region: "National", img: "./images/cz/gulas.png", ingredients: ["Beef", "Onions", "Marjoram", "Bread dumplings"], instructions: ["Thick beef stew seasoned heavily with marjoram; unlike Hungarian version, it is thicker."] },
@@ -1978,7 +1978,7 @@ const allRecipes = {
         { name: "Kremšnita", time: "1 hour", region: "Samobor", img: "./images/hr/kremsnita.png", ingredients: ["Puff pastry", "Egg custard", "Whipped cream"], instructions: ["Sandwich thick, wobbly egg custard between crispy pastry layers."] }
     ],
 
-    "Vatican": [
+    "vatican": [
         { name: "Fettuccine del Papa", time: "25 mins", region: "Vatican City", img: "./images/va/fettuccine.png", ingredients: ["Fettuccine", "Prosciutto", "Peas", "Butter", "Parmesan"], instructions: ["Sauté prosciutto and peas in plenty of butter.", "Toss with fresh fettuccine and cheese.", "Named in honor of Pope Pius XII."] },
         { name: "Barbagiuan", time: "45 mins", region: "Monaco", img: "./images/mc/barbagiuan.png", ingredients: ["Swiss chard", "Ricotta", "Pastry", "Parmesan"], instructions: ["Mix chopped chard, cheese, and leeks.", "Enclose in pastry dough and deep-fry.", "The national snack of Monaco."] },
         { name: "Torta Tre Monti", time: "1 hour", region: "San Marino", img: "./images/sm/tremonti.png", ingredients: ["Wafers", "Hazelnut cream", "Chocolate"], instructions: ["Layer thin wafers with hazelnut cocoa cream.", "Trim the edges to represent the three peaks of San Marino.", "Coat the exterior in dark chocolate."] },
@@ -2048,7 +2048,7 @@ const allRecipes = {
         { name: "Powder Bun", time: "30 mins", region: "National", img: "./images/bz/powderbun.png", ingredients: ["Flour", "Cinnamon", "Raisins", "Sugar"], instructions: ["Small, sweet, ginger-flecked buns common for tea time."] }
     ],
 
-    "el_salvador": [
+    "el salvador": [
         { name: "Pupusas", time: "45 mins", region: "National", img: "./images/sv/pupusas.png", ingredients: ["Corn or Rice masa", "Cheese", "Chicharrón", "Refried beans"], instructions: ["Hand-stuff masa with cheese or meat and flatten into a thick disk.", "Cook on a hot griddle until the cheese oozes and the dough has brown spots.", "Always serve with 'curtido' (pickled cabbage) and tomato salsa."] },
         { name: "Sopa de Pata", time: "4 hours", region: "National", img: "./images/sv/sopapata.png", ingredients: ["Cow's feet", "Tripe", "Yucca", "Corn", "Tripe"], instructions: ["A very thick, rich soup made from cow's feet and tripe, flavored with many vegetables."] },
         { name: "Yuca con Chicharrón", time: "1 hour", region: "National", img: "./images/sv/yuca.png", ingredients: ["Yucca", "Fried pork chunks", "Curtido", "Salsa"], instructions: ["Boiled or fried yucca topped with crispy pork and pickled salad."] },
@@ -2117,7 +2117,7 @@ const allRecipes = {
         { name: "Garnachas (Nicaraguan)", time: "30 mins", region: "National", img: "./images/ni/garnachas.png", ingredients: ["Tortillas", "Minced meat", "Cheese", "Tomato sauce"], instructions: ["Small fried tortillas topped with savory meat."] }
     ],
 
-    "costa_rica": [
+    "costa rica": [
         { name: "Gallo Pinto", time: "30 mins", region: "National", img: "./images/cr/gallopinto.png", ingredients: ["Black beans", "Rice", "Lizano sauce", "Bell pepper", "Onion"], instructions: ["Sauté vegetables, then fry pre-cooked black beans and rice together.", "The key ingredient is Salsa Lizano, which gives it a tangy, smoky flavor.", "Served with eggs, fried plantains, and 'natilla' (sour cream)."] },
         { name: "Casado", time: "1 hour", region: "National", img: "./images/cr/casado.png", ingredients: ["Rice", "Beans", "Meat/Fish", "Salad", "Fried plantain"], instructions: ["A 'married man's' meal; a platter containing rice, beans, a protein, and several side salads."] },
         { name: "Olla de Carne", time: "3 hours", region: "National", img: "./images/cr/olladecarne.png", ingredients: ["Beef", "Yucca", "Plantains", "Tiquisque", "Corn"], instructions: ["A rich beef stew with every root vegetable imaginable."] },
@@ -2466,29 +2466,6 @@ const allRecipes = {
     { name: "Digby Chicks", time: "10 mins", region: "Nova Scotia", img: "./images/ca/digby.png", ingredients: ["Smoked herring strips", "Potatoes"], instructions: ["Salt-cured and hard-smoked herring strips.", "Traditionally eaten as a salty snack or with boiled potatoes."] }
 ],
 
-"russia": [
-    { name: "Borscht", time: "1.5 hours", region: "National", img: "./images/russia/borscht.png", ingredients: ["Beets", "Beef", "Cabbage", "Sour cream"], instructions: ["Simmer beets and meat into a deep red soup", "Serve with a dollop of cream"] },
-    { name: "Pelmeni", time: "1 hour", region: "Siberia", img: "./images/russia/pelmeni.png", ingredients: ["Dough", "Ground beef/pork", "Butter"], instructions: ["Fold meat into thin dough", "Boil and serve with butter and vinegar"] },
-    { name: "Beef Stroganoff", time: "40 mins", region: "National", img: "./images/russia/stroganoff.png", ingredients: ["Beef strips", "Mushrooms", "Sour cream", "Onion"], instructions: ["Sauté beef and mushrooms", "Simmer in a rich sour cream sauce"] },
-    { name: "Blini", time: "30 mins", region: "National", img: "./images/russia/blini.png", ingredients: ["Flour", "Milk", "Eggs", "Caviar/Jam"], instructions: ["Make thin pancakes", "Serve with savory or sweet toppings"] },
-    { name: "Piroshki", time: "1.5 hours", region: "National", img: "./images/russia/piroshki.png", ingredients: ["Yeast dough", "Cabbage", "Meat", "Egg"], instructions: ["Stuff dough buns with savory fillings", "Bake or fry until golden"] },
-    { name: "Shashlik", time: "45 mins", region: "Caucasus", img: "./images/russia/shashlik.png", ingredients: ["Lamb or Pork", "Vinegar", "Onions"], instructions: ["Marinate meat in acid and onions", "Grill on large skewers over hot coals"] },
-    { name: "Olivier Salad", time: "40 mins", region: "National", img: "./images/russia/olivier.png", ingredients: ["Potatoes", "Peas", "Pickles", "Mayo", "Ham"], instructions: ["Diced boiled vegetables and meat tossed in a heavy mayo dressing"] },
-    { name: "Golubtsi", time: "1.5 hours", region: "National", img: "./images/russia/golubtsi.png", ingredients: ["Cabbage leaves", "Rice", "Ground meat", "Tomato"], instructions: ["Roll meat and rice in softened cabbage", "Braise in tomato sauce"] },
-    { name: "Solyanka", time: "1 hour", region: "National", img: "./images/russia/solyanka.png", ingredients: ["Olives", "Pickles", "Assorted meats", "Lemon"], instructions: ["A thick, spicy, and sour soup with cured meats and pickles"] },
-    { name: "Shchi", time: "1.5 hours", region: "National", img: "./images/russia/shchi.png", ingredients: ["Cabbage", "Beef", "Potatoes", "Dill"], instructions: ["Traditional cabbage soup simmered until mellow and sweet"] },
-    { name: "Vatrushka", time: "1 hour", region: "National", img: "./images/russia/vatrushka.png", ingredients: ["Dough", "Tvorog (Quark)", "Sugar"], instructions: ["Open-faced sweet buns filled with sweetened cottage cheese"] },
-    { name: "Okroshka", time: "20 mins", region: "National", img: "./images/russia/okroshka.png", ingredients: ["Kvass", "Cucumber", "Boiled eggs", "Radish"], instructions: ["A cold soup made with raw vegetables and a fermented bread drink"] },
-    { name: "Ukha", time: "45 mins", region: "National", img: "./images/russia/ukha.png", ingredients: ["Freshwater fish", "Potatoes", "Carrots", "Vodka shot"], instructions: ["Clear fish broth simmered with vegetables and a splash of vodka"] },
-    { name: "Kholodets", time: "6 hours", region: "National", img: "./images/russia/kholodets.png", ingredients: ["Pork trotters", "Beef", "Garlic"], instructions: ["Boil meat until broth gels", "Set meat in jelly and serve cold"] },
-    { name: "Draniki", time: "30 mins", region: "National", img: "./images/russia/draniki.png", ingredients: ["Potatoes", "Onion", "Egg", "Flour"], instructions: ["Grate potatoes", "Form into patties and fry until crispy"] },
-    { name: "Syrniki", time: "25 mins", region: "National", img: "./images/russia/syrniki.png", ingredients: ["Tvorog (Quark)", "Flour", "Egg", "Sugar"], instructions: ["Fried cheese pancakes served with jam or sour cream"] },
-    { name: "Medovik", time: "2.5 hours", region: "National", img: "./images/russia/medovik.png", ingredients: ["Honey", "Flour", "Sour cream frosting"], instructions: ["Layer thin honey cakes with tangy cream frosting"] },
-    { name: "Kasha", time: "20 mins", region: "National", img: "./images/russia/kasha.png", ingredients: ["Buckwheat", "Butter", "Salt"], instructions: ["Toasted buckwheat groats boiled until fluffy with butter"] },
-    { name: "Chicken Kiev", time: "1 hour", region: "National", img: "./images/russia/kiev.png", ingredients: ["Chicken breast", "Garlic butter", "Breadcrumbs"], instructions: ["Stuff chicken with herb butter", "Bread and fry until the butter melts inside"] },
-    { name: "Pastila", time: "4 hours", region: "Kolomna", img: "./images/russia/pastila.png", ingredients: ["Apples", "Egg whites", "Honey"], instructions: ["Airy apple marshmallow-like treat baked at low heat"] }
-],
-
 // Northern Africa 
 
     "morocco": [
@@ -2566,7 +2543,7 @@ const allRecipes = {
     { name: "Brown Stew Chicken", time: "1 hour", region: "National", img: "./images/jamaica/brown-stew.png", ingredients: ["Chicken", "Browning sauce", "Ginger", "Thyme"], instructions: ["Fry chicken", "Simmer in a rich, dark, savory gravy"] }
 ],
 
-"south_africa": [
+"south africa": [
     { name: "Bobotie", time: "1 hour", region: "National", img: "./images/sa/bobotie.png", ingredients: ["Ground beef", "Curry powder", "Apricot jam", "Egg custard"], instructions: ["Bake spiced meat topped with a savory egg-based custard"] },
     { name: "Biltong", time: "3 days", region: "National", img: "./images/sa/biltong.png", ingredients: ["Beef", "Coriander seeds", "Vinegar", "Salt"], instructions: ["Cure meat in vinegar and spices, then air-dry until chewy"] },
     { name: "Boerewors", time: "45 mins", region: "National", img: "./images/sa/boerewors.png", ingredients: ["Beef", "Pork", "Coriander", "Cloves"], instructions: ["Spiral the spiced sausage and grill over a 'braai' (barbecue)"] },

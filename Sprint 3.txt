@@ -1,12 +1,13 @@
-Work Log for Edward Jones:
+Work Log for Johny Suy:
 
 Date | Time Started | Duration | Description 
 
-01/07/2025 | 10:00 | 1 hr  | Class
-01/10/2025 | 11:00 | 2 hrs | Wire Frame
-01/11/2025 | 9:00  | 1 hr  | class
-01/12/2025 | 2:30  | 1 hr  | HTML  
-01/14/2025 | 9:00  | 1 hr  | Class
-01/15/2025 | 3:00  | 1 hr  | Research for Images 
-01/21/2025 | 9:00  | 1 hr  | Class
+02/04/2026 | 03:30 | 1 hr  | do the login and sip up page
+02/04/2026 | 10:40 | 1 hr  | Create a recipes page for all 195+ countries
+02/06/2026 | 02:33 | 1 hr  | Link the recipes page into each continents 
+02/08/2026 | 09:05 | 1 hr  | Try to create data base for my webpage 
+02/09/2026 | 09:05 | 1 hr  | Class
+02/11/2026 | 09:05 | 1 hr  | Class
+
+
 

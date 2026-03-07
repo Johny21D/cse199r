@@ -1,12 +1,12 @@
-Work Log for Edward Jones:
+Work Log for Johny Suy:
 
 Date | Time Started | Duration | Description 
 
-01/07/2025 | 10:00 | 1 hr  | Class
-01/10/2025 | 11:00 | 2 hrs | Wire Frame
-01/11/2025 | 9:00  | 1 hr  | class
-01/12/2025 | 2:30  | 1 hr  | HTML  
-01/14/2025 | 9:00  | 1 hr  | Class
-01/15/2025 | 3:00  | 1 hr  | Research for Images 
-01/21/2025 | 9:00  | 1 hr  | Class
+ 01/21/2026 | 10:15 | 1 hr  | Find more images and put into upload into vscode
+ 01/26/2026 | 9:00  | 1 hr  | Class
+ 01/28/2026 | 3:00  | 1 hr  | Work on JavaScript
+ 01/30/2026 | 10:00 | 2 hr  | Revise my wire frames and html code 
+ 01/31/2026 | 1:00  | 2 hr  | Put CSS code to other children page  
+ 02/02/2026 | 9:00  | 1 hr  | Class
+
 

@@ -171,6 +171,7 @@ if (displayArea) {
   if (searchQuery) {
     pageTitle.innerText = `Search Results for: "${searchQuery}"`;
     displayArea.classList.add('recipe-view');
+    document.querySelector('.search-wrapper').style.display = 'none';
 
     let searchResults = [];
     Object.keys(allRecipes).forEach(countryKey => {
@@ -207,6 +208,7 @@ if (displayArea) {
   } else if (selectedCountry) {
     document.body.classList.add('recipe-active');
     displayArea.classList.add('recipe-view');
+    document.querySelector('.search-wrapper').style.display = 'none';
 
     const recipes = allRecipes[selectedCountry];
 
@@ -217,7 +219,7 @@ if (displayArea) {
         .join('');
 
       const backBtn = document.createElement('a');
-      backBtn.href      = '?';
+      backBtn.href      = 'recipes.html';
       backBtn.className = 'back-link';
       backBtn.innerText = '← Back to Library';
       displayArea.appendChild(backBtn);
