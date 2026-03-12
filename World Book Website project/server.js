@@ -10,6 +10,7 @@ const crypto = require('crypto');
 
 const app = express();
 
+// --- MIDDLEWARE ---
 app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'], allowedHeaders: ['Content-Type', 'Authorization'] }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'Public')));
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'Public', 'index.html'));
 });
 
-// ─── DATABASE ─────────────────────────────────────────────────────────────────
+// --- DATABASE CONNECTION ---
 const client = new MongoClient(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 });
 let db;
 
@@ -26,10 +27,13 @@ async function connectDB() {
   try {
     await client.connect();
     db = client.db('myDatabase');
-    console.log('✅ Connected to MongoDB!');
+    console.log('✅ Connected to MongoDB Atlas!');
+    
     await db.collection('users').createIndex({ email: 1 }, { unique: true });
+
+    // Use process.env.PORT for hosting services like Render
     const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => console.log(`🚀 Server started on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   } catch (err) {
     console.error('❌ Error connecting to MongoDB:', err.message);
     process.exit(1);
@@ -37,16 +41,16 @@ async function connectDB() {
 }
 connectDB();
 
-// ─── EMAIL TRANSPORTER ────────────────────────────────────────────────────────
+// --- EMAIL TRANSPORTER ---
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS // Use a Gmail App Password here!
   }
 });
 
-// ─── AUTH MIDDLEWARE ──────────────────────────────────────────────────────────
+// --- AUTH MIDDLEWARE ---
 function verifyToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -59,7 +63,7 @@ function verifyToken(req, res, next) {
   }
 }
 
-// ─── SIGNUP ───────────────────────────────────────────────────────────────────
+// --- SIGNUP ---
 app.post('/signup', async (req, res) => {
   const { name, email, phone, password } = req.body;
   if (!name || !email || !password) return res.status(400).json({ message: 'All fields are required.' });
@@ -74,7 +78,7 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-// ─── LOGIN ────────────────────────────────────────────────────────────────────
+// --- LOGIN ---
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) return res.status(400).json({ message: 'Email and password are required.' });
@@ -93,7 +97,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// ─── FORGOT PASSWORD ──────────────────────────────────────────────────────────
+// --- FORGOT PASSWORD ---
 app.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ message: 'Email is required.' });
@@ -102,7 +106,6 @@ app.post('/forgot-password', async (req, res) => {
     const user = await db.collection('users').findOne({ email });
     if (!user) return res.status(400).json({ message: 'No account found with that email.' });
 
-    // Generate reset token
     const resetToken = crypto.randomBytes(32).toString('hex');
     const resetExpires = new Date(Date.now() + 3600000); // 1 hour
 
@@ -111,8 +114,9 @@ app.post('/forgot-password', async (req, res) => {
       { $set: { resetToken, resetExpires } }
     );
 
-    // Send email
-    const resetLink = `http://localhost:3000/login-page/reset-password.html?token=${resetToken}&email=${email}`;
+    // FIX: Use process.env.BASE_URL so it works on the real website
+    const baseURL = process.env.BASE_URL || 'http://localhost:3000';
+    const resetLink = `${baseURL}/login-page/reset-password.html?token=${resetToken}&email=${email}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -132,7 +136,7 @@ app.post('/forgot-password', async (req, res) => {
   }
 });
 
-// ─── RESET PASSWORD ───────────────────────────────────────────────────────────
+// --- RESET PASSWORD ---
 app.post('/reset-password', async (req, res) => {
   const { email, token, newPassword } = req.body;
   if (!email || !token || !newPassword) return res.status(400).json({ message: 'All fields are required.' });
@@ -154,7 +158,7 @@ app.post('/reset-password', async (req, res) => {
   }
 });
 
-// ─── PROFILE ──────────────────────────────────────────────────────────────────
+// --- PROFILE ---
 app.get('/profile', verifyToken, async (req, res) => {
   try {
     const user = await db.collection('users').findOne({ email: req.user.email }, { projection: { password: 0 } });
