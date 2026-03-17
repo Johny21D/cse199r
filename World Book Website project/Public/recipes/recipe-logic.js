@@ -108,50 +108,30 @@ function registerRecipe(country, recipe) {
 }
 
 // ── SHARED CARD BUILDER ────────────────────────────────────────────
+const fixImg = (url) => {
+  if (!url) return '';
+  return (url.includes('wikimedia.org') || url.includes('wikipedia.org')) 
+    ? `//wsrv.nl/?url=${encodeURIComponent(url)}` 
+    : url;
+};
+
 function buildCardHTML(recipe, countryKey, showCountryLabel) {
   const id = registerRecipe(countryKey, recipe);
-
-  const ingredientsHTML = (recipe.ingredients || [])
-    .map(ing => `<li>${ing}</li>`)
-    .join('');
-
-  const instructionsHTML = (recipe.instructions || [])
-    .map((step, i) => `
-      <li class="instruction-step">
-        <span class="step-num">${i + 1}</span>
-        <span class="step-text">${step}</span>
-      </li>`)
-    .join('');
-
-  const countryBadge = showCountryLabel
-    ? `<span class="country-badge">📍 ${countryKey}</span>`
-    : '';
+  const ingHTML = (recipe.ingredients || []).map(ing => `<li>${ing}</li>`).join('');
+  const instHTML = (recipe.instructions || []).map((step, i) => `<li class="instruction-step"><span class="step-num">${i + 1}</span><span class="step-text">${step}</span></li>`).join('');
+  const badge = showCountryLabel ? `<span class="country-badge">📍 ${countryKey}</span>` : '';
 
   return `
     <section class="region-section">
       <div class="card-image-wrap">
-        <img src="${recipe.img}" class="recipe-img" alt="${recipe.name}"
-             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23aaa%22 font-size=%2216%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+        <img src="${fixImg(recipe.img)}" class="recipe-img" alt="${recipe.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23eee%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'">
         ${heartBtn(id)}
       </div>
-
       <div class="card-body">
-        <h2 class="card-title">${recipe.name}</h2>
-        ${countryBadge}
-        <div class="card-meta">
-          <span class="tag">${recipe.region || ''}</span>
-          <span class="time-label">⏱ ${recipe.time || '—'}</span>
-        </div>
-
-        <details class="card-section" open>
-          <summary class="card-section-toggle">🧂 Ingredients</summary>
-          <ul class="ingredients-list">${ingredientsHTML}</ul>
-        </details>
-
-        <details class="card-section">
-          <summary class="card-section-toggle">👨‍🍳 Instructions</summary>
-          <ol class="instructions-list">${instructionsHTML}</ol>
-        </details>
+        <h2 class="card-title">${recipe.name}</h2>${badge}
+        <div class="card-meta"><span class="tag">${recipe.region || ''}</span><span class="time-label">⏱ ${recipe.time || '—'}</span></div>
+        <details class="card-section" open><summary class="card-section-toggle">🧂 Ingredients</summary><ul class="ingredients-list">${ingHTML}</ul></details>
+        <details class="card-section"><summary class="card-section-toggle">👨‍🍳 Instructions</summary><ol class="instructions-list">${instHTML}</ol></details>
       </div>
     </section>`;
 }
