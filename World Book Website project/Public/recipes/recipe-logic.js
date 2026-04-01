@@ -95,7 +95,6 @@ function registerRecipe(country, recipe) {
     id,
     title:        recipe.name,
     region:       recipe.region,
-    image:        recipe.img,
     emoji:        '🍽️',
     time:         recipe.time || '',
     difficulty:   '',
@@ -108,30 +107,43 @@ function registerRecipe(country, recipe) {
 }
 
 // ── SHARED CARD BUILDER ────────────────────────────────────────────
-const fixImg = (url) => {
-  if (!url) return '';
-  return (url.includes('wikimedia.org') || url.includes('wikipedia.org')) 
-    ? `//wsrv.nl/?url=${encodeURIComponent(url)}` 
-    : url;
-};
-
 function buildCardHTML(recipe, countryKey, showCountryLabel) {
   const id = registerRecipe(countryKey, recipe);
-  const ingHTML = (recipe.ingredients || []).map(ing => `<li>${ing}</li>`).join('');
-  const instHTML = (recipe.instructions || []).map((step, i) => `<li class="instruction-step"><span class="step-num">${i + 1}</span><span class="step-text">${step}</span></li>`).join('');
-  const badge = showCountryLabel ? `<span class="country-badge">📍 ${countryKey}</span>` : '';
+
+  const ingredientsHTML = (recipe.ingredients || [])
+    .map(ing => `<li>${ing}</li>`).join('');
+
+  const instructionsHTML = (recipe.instructions || [])
+    .map((step, i) => `
+      <li class="instruction-step">
+        <span class="step-num">${i + 1}</span>
+        <span class="step-text">${step}</span>
+      </li>`).join('');
+
+  const countryBadge = showCountryLabel
+    ? `<span class="country-badge">📍 ${countryKey}</span>` : '';
 
   return `
     <section class="region-section">
       <div class="card-image-wrap">
-        <img src="${fixImg(recipe.img)}" class="recipe-img" alt="${recipe.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23eee%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+        <div class="recipe-emoji-banner">🍽️</div>
         ${heartBtn(id)}
       </div>
       <div class="card-body">
-        <h2 class="card-title">${recipe.name}</h2>${badge}
-        <div class="card-meta"><span class="tag">${recipe.region || ''}</span><span class="time-label">⏱ ${recipe.time || '—'}</span></div>
-        <details class="card-section" open><summary class="card-section-toggle">🧂 Ingredients</summary><ul class="ingredients-list">${ingHTML}</ul></details>
-        <details class="card-section"><summary class="card-section-toggle">👨‍🍳 Instructions</summary><ol class="instructions-list">${instHTML}</ol></details>
+        <h2 class="card-title">${recipe.name}</h2>
+        ${countryBadge}
+        <div class="card-meta">
+          <span class="tag">${recipe.region || ''}</span>
+          <span class="time-label">⏱ ${recipe.time || '—'}</span>
+        </div>
+        <details class="card-section" open>
+          <summary class="card-section-toggle">🧂 Ingredients</summary>
+          <ul class="ingredients-list">${ingredientsHTML}</ul>
+        </details>
+        <details class="card-section">
+          <summary class="card-section-toggle">👨‍🍳 Instructions</summary>
+          <ol class="instructions-list">${instructionsHTML}</ol>
+        </details>
       </div>
     </section>`;
 }
@@ -233,7 +245,7 @@ if (displayArea) {
       continents[continentName].forEach(country => {
         const card = document.createElement('div');
         card.className = 'country-card';
-        card.dataset.country = country.name.toLowerCase(); // ← ADDED
+        card.dataset.country = country.name.toLowerCase();
         card.innerHTML = `
           <a href="?country=${encodeURIComponent(country.name.toLowerCase())}">
             <img src="https://flagcdn.com/w320/${country.code.toLowerCase()}.png"
@@ -253,6 +265,14 @@ if (displayArea) {
 const style = document.createElement('style');
 style.textContent = `
   .card-image-wrap { position: relative; }
+
+  .recipe-emoji-banner {
+    width: 100%; height: 160px;
+    background: linear-gradient(135deg, #fdf3e7, #fce8cc);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; border-radius: 10px 10px 0 0;
+  }
+
   .heart-btn {
     position: absolute; top: 8px; right: 8px;
     background: white; border: none; border-radius: 50%;
