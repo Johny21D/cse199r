@@ -147,17 +147,19 @@ body.recipe-active nav ul li {
 /* 4. RECIPE VIEW MODE (Forced 4 Columns) */
 /* This kicks in when JS adds the 'recipe-view' class */
 #recipe-display-area.recipe-view {
-    grid-template-columns: repeat(4, 1fr); 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start; /* ADD THIS - stops cards stretching to match tallest */
+    gap: 20px;
 }
 
-#recipe-display-area.recipe-view .region-section {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border: 1px solid #eee;
+#recipe-display-area.recipe-view .region-section img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    display: block;
 }
-
 /* 5. Recipe Content Styling */
 .recipe-img {
     width: 100%;

@@ -96,6 +96,7 @@ function registerRecipe(country, recipe) {
     title:        recipe.name,
     region:       recipe.region,
     emoji:        '🍽️',
+    image:        recipe.img || '',   // ← ADD THIS LINE
     time:         recipe.time || '',
     difficulty:   '',
     servings:     '',
@@ -106,7 +107,6 @@ function registerRecipe(country, recipe) {
   return id;
 }
 
-// ── SHARED CARD BUILDER ────────────────────────────────────────────
 function buildCardHTML(recipe, countryKey, showCountryLabel) {
   const id = registerRecipe(countryKey, recipe);
 
@@ -123,10 +123,28 @@ function buildCardHTML(recipe, countryKey, showCountryLabel) {
   const countryBadge = showCountryLabel
     ? `<span class="country-badge">📍 ${countryKey}</span>` : '';
 
+  // Build image element - use recipe.img if available, else emoji banner
+const imageHTML = recipe.img
+    ? `<img
+        src="${recipe.img}"
+        alt="${recipe.name}"
+        loading="lazy"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        style="
+          width: 100%;
+          height: 320px;
+          object-fit: cover;
+          border-radius: 10px 10px 0 0;
+          display: block;
+        "
+      >
+      <div class="recipe-emoji-banner" style="display:none;">🍽️</div>`
+    : `<div class="recipe-emoji-banner">🍽️</div>`;
+
   return `
     <section class="region-section">
       <div class="card-image-wrap">
-        <div class="recipe-emoji-banner">🍽️</div>
+        ${imageHTML}
         ${heartBtn(id)}
       </div>
       <div class="card-body">
@@ -147,7 +165,6 @@ function buildCardHTML(recipe, countryKey, showCountryLabel) {
       </div>
     </section>`;
 }
-
 // ── MAIN LOGIC ─────────────────────────────────────────────────────
 const displayArea  = document.getElementById('recipe-display-area');
 const pageTitle    = document.querySelector('.page-title');
@@ -271,7 +288,7 @@ style.textContent = `
     background: linear-gradient(135deg, #fdf3e7, #fce8cc);
     display: flex; align-items: center; justify-content: center;
     font-size: 4rem; border-radius: 10px 10px 0 0;
-  }
+}
 
   .heart-btn {
     position: absolute; top: 8px; right: 8px;
